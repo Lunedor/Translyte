@@ -3,7 +3,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A powerful and flexible solution for on-the-fly website translation. This project combines a client-side JavaScript library with a Node.js/Express backend to automatically translate web content using the Google Gemini API.
+A powerful and flexible solution for on-the-fly website translation. This project combines a client-side JavaScript library with a Node.js/Express backend to automatically translate web content using the Google Gemini, OpenAI or Open Router APIs.
 
 If a user requests a language whose translation file is missing, the system automatically generates it from a base language file, saves it on the server for future use, and updates the UI in real-time.
 
