@@ -10,7 +10,9 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 const app = express();
 const PORT = 3000;
-const TRANSLATIONS_DIR = path.join(__dirname, 'translations');
+const TRANSLATIONS_DIR = process.env.TRANSLATIONS_DIR
+    ? path.resolve(process.env.TRANSLATIONS_DIR)
+    : path.join(__dirname, 'translations');
 
 app.use(cors());
 app.use(express.json({ limit: '1mb' }));
