@@ -206,7 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-</script>```
+</script>
+```
 
 ## 🔧 Customization
 
