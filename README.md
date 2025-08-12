@@ -100,38 +100,6 @@ The system needs a "source of truth" to translate from.
 }
 ```
 
-### Configuring the Translations Directory
-
-By default, translation files are stored in the `translations` folder. You can change this location by setting the `TRANSLATIONS_DIR` environment variable.
-
-#### Usage
-
-##### 1. Using a .env File
-
-Create a `.env` file in your project root and add:
-
-```
-TRANSLATIONS_DIR=your_folder_name
-```
-
-##### 2. Setting the Variable in the Shell
-
-**Windows PowerShell:**
-
-```
-$env:TRANSLATIONS_DIR = "your_folder_name"; node server.js
-```
-
-**Linux/macOS Bash:**
-
-```
-TRANSLATIONS_DIR=your_folder_name node server.js
-```
-
-Replace `your_folder_name` with the path to your desired translations directory.
-
-If not set, the server will use the default `translations` folder.
-
 ### Step 5: Run the Server
 
 ```bash
@@ -221,6 +189,38 @@ const translator = new Translyte({
     pathStructure: '{{lng}}/{{ns}}.json'
 });
 ```
+
+### Changing the Main Translations Directory
+
+By default, translation files are stored in the `translations` folder. You can change this location by setting the `TRANSLATIONS_DIR` environment variable.
+
+#### Usage
+
+##### 1. Using a .env File
+
+Create a `.env` file in your project root and add:
+
+```
+TRANSLATIONS_DIR=your_folder_name
+```
+
+##### 2. Setting the Variable in the Shell
+
+**Windows PowerShell:**
+
+```
+$env:TRANSLATIONS_DIR = "your_folder_name"; node server.js
+```
+
+**Linux/macOS Bash:**
+
+```
+TRANSLATIONS_DIR=your_folder_name node server.js
+```
+
+Replace `your_folder_name` with the path to your desired translations directory.
+
+If not set, the server will use the default `translations` folder.
 
 ### Changing the File Structure
 
