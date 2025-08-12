@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Translator Test Page</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f9; color: #333; margin: 0; padding: 2rem; display: flex; justify-content: center; }
+        .container { max-width: 800px; width: 100%; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+        h1 { color: #1a237e; }
+        .controls { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2rem; }
+        button { background-color: #3949ab; color: white; font-weight: bold; cursor: pointer; border: none; transition: background-color 0.3s ease; padding: 0.75rem; font-size: 1rem; border-radius: 8px; }
+        button:disabled { background-color: #9fa8da; cursor: not-allowed; }
+        .status { padding: 1rem; margin-top: 1.5rem; border-radius: 8px; text-align: center; font-weight: 500; }
+        .status.info { background-color: #e3f2fd; color: #1e88e5; }
+        .status.success { background-color: #e8f5e9; color: #388e3c; }
+        .status.error { background-color: #ffebee; color: #d32f2f; }
+        pre { background: #222; color: #eee; padding: 1rem; border-radius: 6px; white-space: pre-wrap; word-wrap: break-word; font-family: 'Courier New', Courier, monospace; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Translator Test Environment</h1>
+        <p>Using the flexible library with a simple <strong>/en.json</strong> structure.</p>
+         <div class="controls">
+            <select id="languageSelect">
+				<option value="en">English</option>
+				<option value="tr">Turkish</option>
+                <option value="es">Spanish</option>
+				<option value="pt">Portuguese</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="ja">Japanese</option>
+            </select>
+            <button id="translateBtn">Translate</button>
+        </div>
+        <div id="status" class="status info">Ready to translate!</div>
+        <h2>Raw JSON Response</h2>
+        <pre id="rawJsonOutput">Click "Translate" to see the raw JSON output.</pre>
+    </div>
+
+    <script src="./translyte.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const languageSelect = document.getElementById('languageSelect');
+            const translateBtn = document.getElementById('translateBtn');
+            const statusEl = document.getElementById('status');
+            const rawJsonOutputEl = document.getElementById('rawJsonOutput');
+
+            const translator = new Translyte({
+                apiEndpoint: 'http://localhost:3000/api',
+                pathStructure: '{{lng}}.json' 
+            });
+            console.log("Translator initialized with pathStructure: '{{lng}}.json'");
+
+            translateBtn.addEventListener('click', async () => {
+                const targetLanguage = languageSelect.value;
+                translateBtn.disabled = true;
+                translateBtn.textContent = 'Translating...';
+                statusEl.textContent = `Fetching/generating translations for '${targetLanguage}'...`;
+                statusEl.className = 'status info';
+                rawJsonOutputEl.textContent = '...';
+                try {
+                    const translations = await translator.getTranslations(targetLanguage, 'main');
+                    rawJsonOutputEl.textContent = JSON.stringify(translations, null, 2);
+                    statusEl.textContent = `Successfully loaded translations for '${targetLanguage}'!`;
+                    statusEl.className = 'status success';
+                } catch (error) {
+                    console.error('Translation failed:', error);
+                    statusEl.textContent = `Error: ${error.message}`;
+                    statusEl.className = 'status error';
+                    rawJsonOutputEl.textContent = `An error occurred. Check the server console (in your terminal) for details.`;
+                } finally {
+                    translateBtn.disabled = false;
+                    translateBtn.textContent = 'Translate';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
