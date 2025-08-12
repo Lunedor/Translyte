@@ -1,51 +1,3 @@
-# 🔌 AI Provider Support
-
-Translyte supports multiple AI providers for translation generation:
-
-- **Google Gemini** (default)
-- **OpenAI** (e.g., GPT-3.5, GPT-4)
-- **OpenRouter**
-
-
-You can select your provider using the `TRANSLATION_PROVIDER` environment variable. Supported values: `gemini`, `openai`, `openrouter`.
-
-## Model Selection
-
-You can also select the AI model for each provider:
-
-- **Gemini:** Set `GEMINI_MODEL` (default: `gemini-2.5-flash`)
-- **OpenAI:** Set `OPENAI_MODEL` (default: `gpt-3.5-turbo`)
-- **OpenRouter:** Set `OPENROUTER_MODEL` (default: `openai/gpt-3.5-turbo`)
-
-You can override the model per request by passing a `model` property in the POST body to `/api/generate-translation`.
-
-## Environment Variables
-
-Add the following to your `.env` file as needed:
-
-```
-# Choose your provider: gemini, openai, or openrouter
-TRANSLATION_PROVIDER=gemini
-
-# For Gemini (Google)
-GEMINI_API_KEY=YOUR_GEMINI_API_KEY
-# Optional: select model
-GEMINI_MODEL=gemini-2.5-flash
-
-# For OpenAI
-OPENAI_API_KEY=YOUR_OPENAI_API_KEY
-# Optional: select model
-OPENAI_MODEL=gpt-3.5-turbo
-
-# For OpenRouter
-OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
-# Optional: select model
-OPENROUTER_MODEL=openai/gpt-3.5-turbo
-```
-
-> Only the API key for your selected provider is required. Model variables are optional.
-
----
 ![Translyte](translyte.png)
 ## Dynamic AI Web Translator
 
@@ -106,7 +58,18 @@ Translyte supports multiple AI providers for translation generation:
 - **OpenAI** (e.g., GPT-3.5, GPT-4)
 - **OpenRouter**
 
+
 You can select your provider using the `TRANSLATION_PROVIDER` environment variable. Supported values: `gemini`, `openai`, `openrouter`.
+
+## Model Selection
+
+You can also select the AI model for each provider:
+
+- **Gemini:** Set `GEMINI_MODEL` (default: `gemini-2.5-flash`)
+- **OpenAI:** Set `OPENAI_MODEL` (default: `gpt-3.5-turbo`)
+- **OpenRouter:** Set `OPENROUTER_MODEL` (default: `openai/gpt-3.5-turbo`)
+
+You can override the model per request by passing a `model` property in the POST body to `/api/generate-translation`.
 
 ## Environment Variables
 
@@ -118,15 +81,21 @@ TRANSLATION_PROVIDER=gemini
 
 # For Gemini (Google)
 GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+# Optional: select model
+GEMINI_MODEL=gemini-2.5-flash
 
 # For OpenAI
 OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+# Optional: select model
+OPENAI_MODEL=gpt-3.5-turbo
 
 # For OpenRouter
 OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
+# Optional: select model
+OPENROUTER_MODEL=openai/gpt-3.5-turbo
 ```
 
-> Only the API key for your selected provider is required.
+> Only the API key for your selected provider is required. Model variables are optional.
 
 ---
 
