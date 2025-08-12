@@ -1,0 +1,28 @@
+# Dependencies
+# This folder contains all the downloaded packages and can be reinstalled with `npm install`.
+/node_modules
+
+# Environment Variables
+# This file contains your secret GEMINI_API_KEY and should NEVER be committed.
+.env
+
+# Generated Translation Files
+# The core feature of Translyte is to generate these on the fly.
+# You should only commit your base language file(s) and let the server
+# create the others when they are needed.
+
+# This pattern ignores all files in /translations...
+/translations/*
+
+# ...but re-includes your base language file.
+# Update this line if your base language is not 'en'.
+!/translations/en.json
+
+# If you use a nested structure like /en/main.json, comment out the
+# two lines above and use something like this instead:
+# !/translations/en/
+# !/translations/en/main.json
+
+# Operating System generated files
+.DS_Store
+Thumbs.db

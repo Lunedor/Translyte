@@ -1,4 +1,4 @@
-// ai-translator.js - Final Verified Version
+// translyte.js
 class Translyte {
     constructor(options = {}) {
         this.apiEndpoint = options.apiEndpoint || '/api';

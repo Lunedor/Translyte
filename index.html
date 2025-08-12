@@ -20,8 +20,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>AI Translator Test Environment</h1>
-        <p>Using the flexible library with a simple <strong>/en.json</strong> structure.</p>
+        <h1 data-i18n-key="header_title">AI Translator Test Environment</h1>
+        <p data-i18n-key="header_subtitle">Using the flexible library with a simple <strong>/en.json</strong> structure.</p>
          <div class="controls">
             <select id="languageSelect">
 				<option value="en">English</option>
@@ -32,10 +32,10 @@
                 <option value="de">German</option>
                 <option value="ja">Japanese</option>
             </select>
-            <button id="translateBtn">Translate</button>
+            <button id="translateBtn" data-i18n-key="button_text">Translate</button>
         </div>
-        <div id="status" class="status info">Ready to translate!</div>
-        <h2>Raw JSON Response</h2>
+        <div id="status" class="status info" data-i18n-key="status_ready">Ready to translate!</div>
+        <h2 data-i18n-key="json_response_title">Raw JSON Response</h2>
         <pre id="rawJsonOutput">Click "Translate" to see the raw JSON output.</pre>
     </div>
 
@@ -47,23 +47,42 @@
             const statusEl = document.getElementById('status');
             const rawJsonOutputEl = document.getElementById('rawJsonOutput');
 
+            // 1. Initialize the translator, being explicit with the baseLanguage
             const translator = new Translyte({
                 apiEndpoint: 'http://localhost:3000/api',
-                pathStructure: '{{lng}}.json' 
+                pathStructure: '{{lng}}.json',
+                baseLanguage: 'en'
             });
-            console.log("Translator initialized with pathStructure: '{{lng}}.json'");
 
-            translateBtn.addEventListener('click', async () => {
-                const targetLanguage = languageSelect.value;
+            // 2. Helper function to update the UI (from your README)
+            function translateUI(translations) {
+                document.querySelectorAll('[data-i18n-key]').forEach(element => {
+                    const key = element.getAttribute('data-i18n-key');
+                    if (translations[key]) {
+                        // Using .innerHTML allows rendering of HTML tags in your strings
+                        element.innerHTML = translations[key];
+                    }
+                });
+            }
+
+            // 3. A function to handle the full translation process
+            async function handleTranslation(languageCode) {
                 translateBtn.disabled = true;
-                translateBtn.textContent = 'Translating...';
-                statusEl.textContent = `Fetching/generating translations for '${targetLanguage}'...`;
+                translateBtn.innerHTML = 'Translating...'; // Use innerHTML to be consistent
+                statusEl.textContent = `Fetching/generating translations for '${languageCode}'...`;
                 statusEl.className = 'status info';
                 rawJsonOutputEl.textContent = '...';
+
                 try {
-                    const translations = await translator.getTranslations(targetLanguage, 'main');
+                    // Fetch/generate the translation data
+                    const translations = await translator.getTranslations(languageCode, 'main');
+
+                    // Apply the loaded translations to the page UI
+                    translateUI(translations);
+
+                    // Also display the raw JSON
                     rawJsonOutputEl.textContent = JSON.stringify(translations, null, 2);
-                    statusEl.textContent = `Successfully loaded translations for '${targetLanguage}'!`;
+                    statusEl.textContent = `Successfully loaded translations for '${languageCode}'!`;
                     statusEl.className = 'status success';
                 } catch (error) {
                     console.error('Translation failed:', error);
@@ -72,9 +91,15 @@
                     rawJsonOutputEl.textContent = `An error occurred. Check the server console (in your terminal) for details.`;
                 } finally {
                     translateBtn.disabled = false;
-                    translateBtn.textContent = 'Translate';
+                    // The button text is now set by translateUI, so no need to reset it manually
                 }
-            });
+            }
+
+            // 4. Event listener to trigger translation
+            translateBtn.addEventListener('click', () => handleTranslation(languageSelect.value));
+
+            // 5. Initial translation on page load for the base language
+            handleTranslation(translator.baseLanguage);
         });
     </script>
 </body>

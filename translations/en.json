@@ -1,21 +1,7 @@
 {
-  "common": {
-    "appName": "AI Translator Pro",
-    "loading": "Loading...",
-    "save": "Save",
-    "cancel": "Cancel"
-  },
-  "homepage": {
-    "title": "Welcome to our Application",
-    "greeting": "Hello, {{name}}!",
-    "description": "This is a demonstration of our new <strong>AI-powered translation</strong> library. It connects to a backend to fetch and store JSON files.",
-    "ctaButton": "Get Started"
-  },
-  "messages": {
-    "itemCount_one": "You have 1 new item in your cart.",
-    "itemCount_other": "You have {{count}} new items in your cart."
-  },
-  "footer": {
-    "copyright": "© 2025 AI Corp. All rights reserved."
-  }
+  "header_title": "AI Translator Test Environment",
+  "header_subtitle": "Using the flexible library with a simple <strong>/en.json</strong> structure.",
+  "button_text": "Translate",
+  "status_ready": "Ready to translate!",
+  "json_response_title": "Raw JSON Response"
 }
