@@ -2,6 +2,7 @@
 # This folder contains all the downloaded packages and can be reinstalled with `npm install`.
 /node_modules
 /package-lock.json
+
 # Environment Variables
 # This file contains your secret GEMINI_API_KEY and should NEVER be committed.
 .env
