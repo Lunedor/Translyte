@@ -40,7 +40,7 @@ The magic of this system lies in its "generate-on-404" workflow:
 │       └── main.json      # Your base translation file
 ├── node_modules/
 ├── .env                   # For your secret API key (MUST be created)
-├── ai-translator.js       # The core client-side library
+├── translyte.js           # The core client-side library
 ├── index.html             # Demo page showing implementation
 ├── package.json
 ├── package-lock.json
@@ -54,8 +54,8 @@ The magic of this system lies in its "generate-on-404" workflow:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone <your-repository-url>
-cd <your-repository-name>
+git clone https://github.com/Lunedor/Translyte
+cd Translyte
 ```
 
 ### Step 2: Install Dependencies
@@ -135,7 +135,7 @@ Add a `data-i18n-key` attribute to any HTML element you want to translate. The v
 In your page's JavaScript, instantiate the `Translyte` and create a function to apply the translations to your UI.
 
 ```html
-<script src="./ai-translator.js"></script>
+<script src="./translyte.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize the translator with your configuration
