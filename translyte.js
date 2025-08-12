@@ -1,4 +1,3 @@
-// translyte.js
 class Translyte {
     constructor(options = {}) {
         this.apiEndpoint = options.apiEndpoint || '/api';

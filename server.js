@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const fs = require('fs/promises');
 const path = require('path');
@@ -157,7 +156,7 @@ app.post(/\/api\/translations\/(.*)/, async (req, res) => {
     }
 });
 
-// --- START SERVER ---
+// - START SERVER -
 app.listen(PORT, () => {
     console.log(`===================================================`);
     console.log(`  Server started successfully at http://localhost:${PORT}`);

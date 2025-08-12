@@ -55,7 +55,7 @@ The magic of this system lies in its "generate-on-404" workflow:
 Translyte supports multiple AI providers for translation generation:
 
 - **Google Gemini** (default)
-- **OpenAI** (e.g., GPT-3.5, GPT-4)
+- **OpenAI**
 - **OpenRouter**
 
 
