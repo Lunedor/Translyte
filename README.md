@@ -1,3 +1,51 @@
+# 🔌 AI Provider Support
+
+Translyte supports multiple AI providers for translation generation:
+
+- **Google Gemini** (default)
+- **OpenAI** (e.g., GPT-3.5, GPT-4)
+- **OpenRouter**
+
+
+You can select your provider using the `TRANSLATION_PROVIDER` environment variable. Supported values: `gemini`, `openai`, `openrouter`.
+
+## Model Selection
+
+You can also select the AI model for each provider:
+
+- **Gemini:** Set `GEMINI_MODEL` (default: `gemini-2.5-flash`)
+- **OpenAI:** Set `OPENAI_MODEL` (default: `gpt-3.5-turbo`)
+- **OpenRouter:** Set `OPENROUTER_MODEL` (default: `openai/gpt-3.5-turbo`)
+
+You can override the model per request by passing a `model` property in the POST body to `/api/generate-translation`.
+
+## Environment Variables
+
+Add the following to your `.env` file as needed:
+
+```
+# Choose your provider: gemini, openai, or openrouter
+TRANSLATION_PROVIDER=gemini
+
+# For Gemini (Google)
+GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+# Optional: select model
+GEMINI_MODEL=gemini-2.5-flash
+
+# For OpenAI
+OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+# Optional: select model
+OPENAI_MODEL=gpt-3.5-turbo
+
+# For OpenRouter
+OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
+# Optional: select model
+OPENROUTER_MODEL=openai/gpt-3.5-turbo
+```
+
+> Only the API key for your selected provider is required. Model variables are optional.
+
+---
 ![Translyte](translyte.png)
 ## Dynamic AI Web Translator
 
@@ -5,7 +53,7 @@
 
 A powerful and flexible solution for on-the-fly website translation. This project combines a client-side JavaScript library with a Node.js/Express backend to automatically translate web content using the Google Gemini API.
 
-When a user requests a language for which a translation file doesn't exist, the system automatically generates it from a base language file, saves it on the server for future use, and updates the UI in real-time.
+If a user requests a language whose translation file is missing, the system automatically generates it from a base language file, saves it on the server for future use, and updates the UI in real-time.
 
 
 ## Core Features
@@ -14,7 +62,7 @@ When a user requests a language for which a translation file doesn't exist, the 
 -   **Automatic File Generation**: The server automatically creates and saves new JSON translation files.
 -   **Session Caching**: Translations are cached on the client-side to avoid re-fetching data during a single session.
 -   **Flexible File Structure**: Easily configure any directory structure for your translation files (e.g., `en.json` or `en/main.json`).
--   **Any Base Language**: Your source language doesn't have to be English. Set up the project with German, French, Turkish or any other language as your source of truth.
+-   **Supports Any Base Language**: Your source language doesn't have to be English. Set up the project with German, French, Turkish or any other language as your source of truth.
 -   **Preserves HTML**: The translation prompt is configured to preserve HTML tags and placeholder variables (like `{{name}}`) within your strings.
 
 ## How It Works
@@ -31,10 +79,11 @@ The magic of this system lies in its "generate-on-404" workflow:
 8.  **Save New File**: The server receives the generated JSON from the AI and saves it to the correct path (`translations/es/main.json`).
 9.  **Return & Cache**: The newly generated translation is sent back to the client, which then updates the UI and caches the result for the session.
 
+
 ## Project Structure
 
 ```
-/
+/ 
 ├── translations/
 │   └── en/
 │       └── main.json      # Your base translation file
@@ -49,6 +98,38 @@ The magic of this system lies in its "generate-on-404" workflow:
 
 ---
 
+# 🔌 AI Provider Support
+
+Translyte supports multiple AI providers for translation generation:
+
+- **Google Gemini** (default)
+- **OpenAI** (e.g., GPT-3.5, GPT-4)
+- **OpenRouter**
+
+You can select your provider using the `TRANSLATION_PROVIDER` environment variable. Supported values: `gemini`, `openai`, `openrouter`.
+
+## Environment Variables
+
+Add the following to your `.env` file as needed:
+
+```
+# Choose your provider: gemini, openai, or openrouter
+TRANSLATION_PROVIDER=gemini
+
+# For Gemini (Google)
+GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+
+# For OpenAI
+OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+
+# For OpenRouter
+OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
+```
+
+> Only the API key for your selected provider is required.
+
+---
+
 ## 🚀 Setup and Installation
 
 ### Step 1: Clone the Repository
@@ -60,23 +141,19 @@ cd Translyte
 
 ### Step 2: Install Dependencies
 
-Make sure you have [Node.js](https://nodejs.org/) installed. Then run:
+Make sure you have [Node.js](https://nodejs.org/) installed.
+
+Install dependencies with:
 
 ```bash
 npm install
 ```
 
-### Step 3: Configure your API Key
 
-The server needs your Google Gemini API key to work.
+### Step 3: Configure your AI Provider and API Key
 
 1.  Create a new file named `.env` in the root of the project.
-2.  Add your API key to this file:
-
-    ```
-    # .env
-    GEMINI_API_KEY=YOUR_API_KEY_HERE
-    ```
+2.  Add your provider and API key(s) as shown above.
 
     > **Security Note**: The `.env` file should be listed in your `.gitignore` file to prevent your secret key from being committed to source control.
 
