@@ -1,6 +1,7 @@
 {
   "header_title": "AI Translator Test Environment",
   "header_subtitle": "Using the flexible library with a simple <strong>/en.json</strong> structure.",
+  "language_select": "Choose language",
   "button_text": "Translate",
   "status_ready": "Ready to translate!",
   "json_response_title": "Raw JSON Response"
