@@ -1,4 +1,4 @@
-[Support me if you are a good person...](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)(https://buymeacoffee.com/lunedor)
+[![Support me if you are a good person...](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/lunedor)
 
 ![Translyte](translyte.png)
 ## Dynamic AI Web Translator
