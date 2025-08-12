@@ -185,7 +185,7 @@ To use a language other than English as your source, simply change the `baseLang
 
 ```javascript
 const translator = new Translyte({
-    baseLanguage: 'tr', // Now uses Turkish as the source
+    baseLanguage: 'fr', // Now uses French as the source
     pathStructure: '{{lng}}/{{ns}}.json'
 });
 ```
