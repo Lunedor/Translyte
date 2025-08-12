@@ -1,4 +1,4 @@
-// server.js - Corrected with Regex Routes
+// server.js
 const express = require('express');
 const fs = require('fs/promises');
 const path = require('path');
@@ -16,9 +16,8 @@ app.use(cors());
 app.use(express.json({ limit: '1mb' }));
 app.use(express.static(__dirname));
 
-// --- API ROUTES (Verified Syntax) ---
+// --- API ROUTES ---
 
-// FIX: Using a regular expression to match the GET route.
 app.get(/\/api\/translations\/(.*)/, async (req, res) => {
     try {
         // The captured path is in req.params[0] when using a regex.
@@ -64,7 +63,6 @@ app.post('/api/generate-translation', async (req, res) => {
     }
 });
 
-// FIX: Using a regular expression to match the POST route.
 app.post(/\/api\/translations\/(.*)/, async (req, res) => {
     try {
         // The captured path is in req.params[0].
